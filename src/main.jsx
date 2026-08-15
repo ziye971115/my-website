@@ -33,13 +33,13 @@ const navItems = [
   },
   { href: '#space', label: '空间场景', children: [] },
   {
-    href: '#ziye',
+    href: '#contact',
     label: '关于我们',
     children: [
-      { href: '#ziye', label: '小红书' },
-      { href: '#ziye', label: '抖音' },
-      { href: '#ziye', label: '微信公众号' },
-      { href: '#ziye', label: '微信' },
+      { href: '#contact-xiaohongshu', label: '小红书' },
+      { href: '#contact-douyin', label: '抖音' },
+      { href: '#contact-official', label: '微信公众号' },
+      { href: '#contact-wechat', label: '微信' },
     ],
   },
 ];
@@ -61,6 +61,37 @@ const heroSlides = [
   { src: 'assets/v2/hero-village.jpg', alt: '雨中的港头村古巷', position: 'center 53%' },
   { src: 'assets/v2/hero-village-blue.jpg', alt: '蓝天白云下的港头村古建筑', position: 'center center' },
   { src: 'assets/v2/hero-village-sunset.jpg', alt: '夕阳映照下的港头村水岸', position: 'center 30%' },
+];
+
+const contactChannels = [
+  {
+    id: 'contact-xiaohongshu',
+    title: '小红书',
+    account: '小红书号：ziye977271',
+    description: '雅集活动 · 空间日常 · 新品分享',
+    image: 'assets/v2/contact/xiaohongshu.jpg',
+  },
+  {
+    id: 'contact-douyin',
+    title: '抖音',
+    account: '抖音号：2097801571',
+    description: '雅集活动 · 空间日常 · 新品分享',
+    image: 'assets/v2/contact/douyin.png',
+  },
+  {
+    id: 'contact-official',
+    title: '微信公众号',
+    account: '微信公众号｜子夜的小院',
+    description: '雅集活动 · 空间日常 · 新品分享',
+    image: 'assets/v2/contact/wechat-official.jpg',
+  },
+  {
+    id: 'contact-wechat',
+    title: '微信',
+    account: '微信｜子夜的小院',
+    description: '到店预约 · 雅集报名 · 品牌合作',
+    image: 'assets/v2/contact/wechat.png',
+  },
 ];
 
 function HeroCarousel({ onRevealNavigation }) {
@@ -236,6 +267,16 @@ function App() {
           <button className="text-action" onClick={() => setBioOpen(true)}>认识子夜 <ArrowRight size={17} /></button>
         </div>
         <figure className="about-photo reveal"><img src="assets/v2/about/ziye-courtyard.jpg" alt="子夜老师在茗香晓筑" /></figure>
+      </section>
+
+      <section className="contacts section" id="contact">
+        <header className="section-heading reveal"><div><p className="eyebrow">FOLLOW · CONTACT</p><h2>关于我们</h2></div><p>关注子夜的小院，了解雅集活动、空间日常与新品分享。</p></header>
+        <div className="contact-grid">
+          {contactChannels.map((channel, index) => <article className="contact-card reveal" id={channel.id} style={{ '--delay': `${index * 70}ms` }} key={channel.id}>
+            <figure><img src={channel.image} alt={`${channel.title}联系方式`} /></figure>
+            <div className="contact-card-copy"><p className="contact-index">0{index + 1}</p><h3>{channel.title}</h3><p>{channel.account}</p><small>{channel.description}</small></div>
+          </article>)}
+        </div>
       </section>
 
       <section className="closing"><div className="closing-mark"><img src="assets/v2/logo-red.png" alt="茗香晓筑生活美学空间" /></div><p>凡是生活，皆可美学。</p><button className="text-action" onClick={() => setContactOpen(true)}>预约到店或合作 <ArrowRight size={17} /></button></section>
