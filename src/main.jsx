@@ -117,7 +117,10 @@ function HeroCarousel({ onRevealNavigation }) {
         key={slide.src}
       />)}
     </div>
-    <div className="hero-brand"><img src="assets/v2/logo-white.png" alt="茗香晓筑生活美学空间" /></div>
+    <div className="hero-brand" aria-label="茗香晓筑生活美学空间">
+      <div className="hero-brand-logo"><img src="assets/v2/logo-white.png" alt="" /></div>
+      <p>生活美学空间</p>
+    </div>
   </section>;
 }
 
