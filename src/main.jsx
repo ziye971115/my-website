@@ -70,6 +70,9 @@ const contactChannels = [
     account: '小红书号：ziye977271',
     description: '雅集活动 · 空间日常 · 新品分享',
     image: 'assets/v2/contact/xiaohongshu.jpg',
+    imageWidth: 891,
+    imageHeight: 1908,
+    crop: '520 1538 310 310',
   },
   {
     id: 'contact-douyin',
@@ -77,6 +80,9 @@ const contactChannels = [
     account: '抖音号：2097801571',
     description: '雅集活动 · 空间日常 · 新品分享',
     image: 'assets/v2/contact/douyin.png',
+    imageWidth: 1266,
+    imageHeight: 1890,
+    crop: '215 250 850 850',
   },
   {
     id: 'contact-official',
@@ -84,6 +90,9 @@ const contactChannels = [
     account: '微信公众号｜子夜的小院',
     description: '雅集活动 · 空间日常 · 新品分享',
     image: 'assets/v2/contact/wechat-official.jpg',
+    imageWidth: 430,
+    imageHeight: 430,
+    crop: '0 0 430 430',
   },
   {
     id: 'contact-wechat',
@@ -91,8 +100,47 @@ const contactChannels = [
     account: '微信｜子夜的小院',
     description: '到店预约 · 雅集报名 · 品牌合作',
     image: 'assets/v2/contact/wechat.png',
+    imageWidth: 934,
+    imageHeight: 1370,
+    crop: '112 355 715 715',
   },
 ];
+
+function ContactCard({ channel, index }) {
+  const titleId = `${channel.id}-code-title`;
+
+  return (
+    <article
+      className="contact-card reveal"
+      id={channel.id}
+      style={{ '--delay': `${index * 70}ms` }}
+    >
+      <figure className="contact-card-media">
+        <span className="contact-code-frame">
+          <svg
+            className="contact-code"
+            viewBox={channel.crop}
+            role="img"
+            aria-labelledby={titleId}
+          >
+            <title id={titleId}>{channel.title}联系码</title>
+            <image
+              href={channel.image}
+              width={channel.imageWidth}
+              height={channel.imageHeight}
+            />
+          </svg>
+        </span>
+      </figure>
+      <div className="contact-card-copy">
+        <p className="contact-index">0{index + 1}</p>
+        <h3>{channel.title}</h3>
+        <p>{channel.account}</p>
+        <small>{channel.description}</small>
+      </div>
+    </article>
+  );
+}
 
 function HeroCarousel({ onRevealNavigation }) {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -275,12 +323,20 @@ function App() {
 
       <section className="contacts section" id="contact">
         <header className="section-heading reveal"><div><p className="eyebrow">FOLLOW · CONTACT</p><h2>关于我们</h2></div><p>关注子夜的小院，了解雅集活动、空间日常与新品分享。</p></header>
-        <div className="contact-grid">
-          {contactChannels.map((channel, index) => <article className="contact-card reveal" id={channel.id} style={{ '--delay': `${index * 70}ms` }} key={channel.id}>
-            <figure><img src={channel.image} alt={`${channel.title}联系方式`} /></figure>
-            <div className="contact-card-copy"><p className="contact-index">0{index + 1}</p><h3>{channel.title}</h3><p>{channel.account}</p><small>{channel.description}</small></div>
-          </article>)}
-        </div>
+          <div className="contact-grid contact-grid-primary">
+            {contactChannels.slice(0, 3).map((channel, index) => (
+              <ContactCard channel={channel} index={index} key={channel.id} />
+            ))}
+          </div>
+          <div className="direct-contact">
+            <header className="direct-contact-heading reveal">
+              <p className="eyebrow">CONTACT US</p>
+              <h3>联系我们</h3>
+            </header>
+            <div className="contact-grid contact-grid-direct">
+              <ContactCard channel={contactChannels[3]} index={3} />
+            </div>
+          </div>
       </section>
 
       <section className="closing"><div className="closing-mark"><img src="assets/v2/logo-red.png" alt="茗香晓筑生活美学空间" /></div><p>凡是生活，皆可美学。</p><button className="text-action" onClick={() => setContactOpen(true)}>预约到店或合作 <ArrowRight size={17} /></button></section>
