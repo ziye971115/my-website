@@ -119,7 +119,8 @@ function HeroCarousel({ onRevealNavigation }) {
     </div>
     <div className="hero-brand" aria-label="茗香晓筑生活美学空间">
       <div className="hero-brand-logo"><img src="assets/v2/logo-white.png" alt="" /></div>
-      <p>生活美学空间</p>
+      <p className="hero-brand-name-pinyin">MINGXIANGXIAOZHU</p>
+      <p className="hero-brand-tagline">生活美学空间</p>
     </div>
   </section>;
 }
