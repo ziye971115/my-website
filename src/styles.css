@@ -31,3 +31,7 @@
 .about-photo img{object-position:50% 55%}
 @media(max-width:640px){.about-photo img{object-position:50% 49%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+.agate-gallery-contact{width:max-content;margin:20px auto 0}
+@media(max-width:700px){.agate-gallery-contact{margin-top:18px}}
+.agate-gallery-main{width:min(100%,370px,calc((100svh - 380px)*.75))}
+@media(max-width:700px){.agate-gallery-main{width:min(100%,320px)}}

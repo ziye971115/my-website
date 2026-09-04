@@ -412,7 +412,7 @@ function RoseProductPage() {
   </div>;
 }
 
-function AgateGalleryModal({ product, activeIndex, onSelect, onClose }) {
+function AgateGalleryModal({ product, activeIndex, onSelect, onClose, onShowWechat }) {
   const closeButtonRef = useRef(null);
 
   useEffect(() => {
@@ -451,6 +451,9 @@ function AgateGalleryModal({ product, activeIndex, onSelect, onClose }) {
           ><img src={image} alt="" loading="lazy" decoding="async" /></button>)}
         </div>
         <small>{String(activeIndex + 1).padStart(2, '0')} / 03</small>
+        <a className="text-action agate-gallery-contact" href="#contact-wechat" onClick={onShowWechat}>
+          微信联系方式 <ArrowRight size={17} />
+        </a>
       </div>
     </section>
   </div>;
@@ -488,6 +491,20 @@ function ProductsSection() {
     window.requestAnimationFrame(() => galleryTriggerRef.current?.focus());
   }, []);
 
+  const showWechatContact = useCallback((event) => {
+    event.preventDefault();
+    setSelectedProduct(null);
+    window.requestAnimationFrame(() => {
+      const contactCard = document.getElementById('contact-wechat');
+      if (!contactCard) return;
+      window.history.replaceState(null, '', '#contact-wechat');
+      contactCard.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'center',
+      });
+    });
+  }, []);
+
   return <section className="products section" id="products">
     <header className="section-heading reveal"><div><h2>产品中心</h2></div><p>不同门类采用适合内容本身的呈现方式，保留器物、文字与图像各自的呼吸。</p></header>
     <div className="product-category-tabs" role="tablist" aria-label="产品分类">
@@ -518,7 +535,7 @@ function ProductsSection() {
       {activeCategory === 'rose' && <RoseProductPage />}
     </div>
     {activeCategory !== 'rose' && <a className="text-action product-link" href="#contact-wechat">了解产品详情 <ArrowRight size={17} /></a>}
-    <AgateGalleryModal product={selectedProduct} activeIndex={activeImageIndex} onSelect={setActiveImageIndex} onClose={closeGallery} />
+    <AgateGalleryModal product={selectedProduct} activeIndex={activeImageIndex} onSelect={setActiveImageIndex} onClose={closeGallery} onShowWechat={showWechatContact} />
   </section>;
 }
 
